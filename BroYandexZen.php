@@ -1,20 +1,31 @@
 <?php
+
 /*
-Plugin Name: Bro YANDEX ZEN RSS feed
-Author: Petrozavodsky
+Plugin Name: Bro Yandex zen rss feed
+Plugin URI: http://alkoweb.ru
+Author: petrozavodsky
 Author URI: http://alkoweb.ru
+Requires PHP: 5.6
 */
 
-require_once( "includes/Wrap.php" );
+require_once( "includes/Autoloader.php" );
+
+use BroYandexZen\Autoloader;
+
+new Autoloader( __FILE__, 'BroYandexZen' );
 
 
-use BroYandexZen\Wrap;
+use BroYandexZen\Base\Wrap;
+use BroYandexZen\Classes\Feed;
 
 class BroYandexZen extends Wrap {
-	public $version = '1.0.0';
+	public $version = '2.0.0';
+	public static $textdomine;
+
 	public $path;
 	public $url;
-	public $categories = array(
+	public static $slug = 'feed-yandex-zen';
+	public static $categories = [
 		'Общество',
 		'Происшествия',
 		'Политика',
@@ -40,15 +51,16 @@ class BroYandexZen extends Wrap {
 		'Фотографии',
 		'Юмор',
 		'Природа',
-		'Путешествия',
-	);
+	];
+
 	function __construct() {
 		$this->addState();
 
-		$this->init( __FILE__, get_called_class() );
-		new \BroYandexZen\Classes\Feed( $this );
-		\BroYandexZen\Classes\FeedHelper::run($this->categories);
-		new        \BroYandexZen\Classes\ZenCategories($this->categories);
+		self::$textdomine = $this->setTextdomain();
+		new Feed( $this->path , $this->slug );
+
+		register_activation_hook( __FILE__, [ $this, 'activate' ] );
+		register_deactivation_hook( __FILE__, [ $this, 'deactivate' ] );
 	}
 
 	private function addState() {
@@ -56,10 +68,20 @@ class BroYandexZen extends Wrap {
 		$this->url  = plugin_dir_url( __FILE__ );
 	}
 
+
+	public function activate() {
+		flush_rewrite_rules();
+	}
+
+	public function deactivate() {
+		flush_rewrite_rules();
+	}
+
+
 }
 
-function bro_yandex_feed_init() {
+function BroYandexZen__init() {
 	new BroYandexZen();
 }
 
-add_action( 'plugins_loaded', 'bro_yandex_feed_init', 200 );
+add_action( 'plugins_loaded', 'BroYandexZen__init', 30 );
