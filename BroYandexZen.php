@@ -60,12 +60,12 @@ class BroYandexZen extends Wrap {
 
 		$this->addState();
 
-		$this->init( __FILE__, get_called_class() );
-
 		\BroYandexZen\Classes\FeedHelper::run( $this->categories );
 		new        \BroYandexZen\Classes\ZenCategories( $this->categories );
+
 		self::$textdomine = $this->setTextdomain();
-		new Feed( $this->path, $this->slug );
+		new Feed( $this->path, $this->
+		g );
 
 		register_activation_hook( __FILE__, [ $this, 'hook_activate' ] );
 		register_deactivation_hook( __FILE__, [ $this, 'hook_deactivate' ] );
