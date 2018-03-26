@@ -51,12 +51,8 @@ class BroYandexZen extends Wrap {
 		'Фотографии',
 		'Юмор',
 		'Природа',
-<<<<<<< HEAD
 		'Путешествия',
-	);
-=======
 	];
->>>>>>> 772d6b6e69562b83a5d51dc9cdf7b10a74a48506
 
 	function __construct() {
 		register_activation_hook( __FILE__, [ $this, 'hook_activate' ] );
@@ -64,18 +60,16 @@ class BroYandexZen extends Wrap {
 
 		$this->addState();
 
-<<<<<<< HEAD
 		$this->init( __FILE__, get_called_class() );
-		new \BroYandexZen\Classes\Feed( $this );
+
 		\BroYandexZen\Classes\FeedHelper::run( $this->categories );
 		new        \BroYandexZen\Classes\ZenCategories( $this->categories );
-=======
 		self::$textdomine = $this->setTextdomain();
-		new Feed( $this->path , $this->slug );
+		new Feed( $this->path, $this->slug );
 
-		register_activation_hook( __FILE__, [ $this, 'activate' ] );
-		register_deactivation_hook( __FILE__, [ $this, 'deactivate' ] );
->>>>>>> 772d6b6e69562b83a5d51dc9cdf7b10a74a48506
+		register_activation_hook( __FILE__, [ $this, 'hook_activate' ] );
+		register_deactivation_hook( __FILE__, [ $this, 'hook_deactivate' ] );
+
 	}
 
 	private function addState() {
@@ -83,8 +77,6 @@ class BroYandexZen extends Wrap {
 		$this->url  = plugin_dir_url( __FILE__ );
 	}
 
-
-<<<<<<< HEAD
 	public function hook_activate() {
 		if ( current_user_can( 'activate_plugins' ) ) {
 			flush_rewrite_rules( false );
@@ -98,17 +90,7 @@ class BroYandexZen extends Wrap {
 
 	}
 
-=======
-	public function activate() {
-		flush_rewrite_rules();
-	}
 
-	public function deactivate() {
-		flush_rewrite_rules();
-	}
-
-
->>>>>>> 772d6b6e69562b83a5d51dc9cdf7b10a74a48506
 }
 
 function BroYandexZen__init() {
