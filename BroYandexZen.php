@@ -42,18 +42,36 @@ class BroYandexZen extends Wrap {
 		'Природа',
 		'Путешествия',
 	);
+
 	function __construct() {
+		register_activation_hook( __FILE__, [ $this, 'hook_activate' ] );
+		register_deactivation_hook( __FILE__, [ $this, 'hook_deactivate' ] );
+
 		$this->addState();
 
 		$this->init( __FILE__, get_called_class() );
 		new \BroYandexZen\Classes\Feed( $this );
-		\BroYandexZen\Classes\FeedHelper::run($this->categories);
-		new        \BroYandexZen\Classes\ZenCategories($this->categories);
+		\BroYandexZen\Classes\FeedHelper::run( $this->categories );
+		new        \BroYandexZen\Classes\ZenCategories( $this->categories );
 	}
 
 	private function addState() {
 		$this->path = plugin_dir_path( __FILE__ );
 		$this->url  = plugin_dir_url( __FILE__ );
+	}
+
+
+	public function hook_activate() {
+		if ( current_user_can( 'activate_plugins' ) ) {
+			flush_rewrite_rules( false );
+		}
+	}
+
+	public function hook_deactivate() {
+		if ( current_user_can( 'activate_plugins' ) ) {
+			flush_rewrite_rules( false );
+		}
+
 	}
 
 }
