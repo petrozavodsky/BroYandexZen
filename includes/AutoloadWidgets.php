@@ -10,7 +10,7 @@ namespace BroYandexZen {
 		 *
 		 * @var array
 		 */
-		protected $prefixes = array();
+        protected $prefixes = [];
 
 		/**
 		 * Register loader with SPL autoloader stack.
