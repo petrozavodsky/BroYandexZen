@@ -19,10 +19,10 @@
 
         global $post;
 
-        $args = array(
+        $args = [
             'post_type' => 'post',
             'posts_per_page' => 32,
-        );
+        ];
 
         $args = apply_filters("BroYandexZenFeedFields_post_args", $args);
 
