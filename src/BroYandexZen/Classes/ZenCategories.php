@@ -12,8 +12,8 @@ class ZenCategories
     function __construct($categories)
     {
         $this->categories = $categories;
-        add_action('add_meta_boxes', array($this, 'fields'), 1);
-        add_action('save_post', array($this, 'fields_update'), 0);
+        add_action('add_meta_boxes', [$this, 'fields'], 1);
+        add_action('save_post', [$this, 'fields_update'], 0);
     }
 
     function fields()
