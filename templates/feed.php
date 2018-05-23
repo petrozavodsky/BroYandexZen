@@ -20,15 +20,6 @@
 		$args  = array(
 			'post_type'      => 'post',
 			'posts_per_page' => 32,
-			'tax_query'      => array(
-				'relation' => 'OR',
-				array(
-					'taxonomy' => 'category',
-					'field'    => 'id',
-					'terms'    => array( 6, 9 ),
-					'operator' => 'NOT IN',
-				)
-			),
         );
 		$args  = apply_filters( "BroYandexZenFeedFields_post_args", $args );
 		$posts = get_posts( $args );
