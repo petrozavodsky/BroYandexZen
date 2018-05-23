@@ -8,93 +8,99 @@ Author URI: http://alkoweb.ru
 Requires PHP: 5.6
 */
 
-require_once( "includes/Autoloader.php" );
+require_once(plugin_dir_path(__FILE__) . "includes/Autoloader.php");
 
 use BroYandexZen\Autoloader;
 
-new Autoloader( __FILE__, 'BroYandexZen' );
+new Autoloader(__FILE__, 'BroYandexZen');
 
 
 use BroYandexZen\Base\Wrap;
 use BroYandexZen\Classes\Feed;
 
-class BroYandexZen extends Wrap {
-	public $version = '2.0.0';
-	public static $textdomine;
+class BroYandexZen extends Wrap
+{
+    public $version = '2.0.0';
+    public static $textdomine;
 
-	public $path;
-	public $url;
-	public static $slug = 'feed-yandex-zen';
-	public static $categories = [
-		'Общество',
-		'Происшествия',
-		'Политика',
-		'Война',
-		'Экономика',
-		'Спорт',
-		'Технологии',
-		'Наука',
-		'Игры',
-		'Музыка',
-		'Литература',
-		'Кино',
-		'Культура',
-		'Мода',
-		'Знаменитости',
-		'Психология',
-		'Здоровье',
-		'Авто',
-		'Дом',
-		'Хобби',
-		'Еда',
-		'Дизайн',
-		'Фотографии',
-		'Юмор',
-		'Природа',
-		'Путешествия',
-	];
+    public $path;
+    public $url;
+    public static $slug = 'feed-yandex-zen';
+    public static $categories = [
+        'Общество',
+        'Происшествия',
+        'Политика',
+        'Война',
+        'Экономика',
+        'Спорт',
+        'Технологии',
+        'Наука',
+        'Игры',
+        'Музыка',
+        'Литература',
+        'Кино',
+        'Культура',
+        'Мода',
+        'Знаменитости',
+        'Психология',
+        'Здоровье',
+        'Авто',
+        'Дом',
+        'Хобби',
+        'Еда',
+        'Дизайн',
+        'Фотографии',
+        'Юмор',
+        'Природа',
+        'Путешествия',
+    ];
 
-	function __construct() {
-		register_activation_hook( __FILE__, [ $this, 'hook_activate' ] );
-		register_deactivation_hook( __FILE__, [ $this, 'hook_deactivate' ] );
+    function __construct()
+    {
+        register_activation_hook(__FILE__, [$this, 'hook_activate']);
+        register_deactivation_hook(__FILE__, [$this, 'hook_deactivate']);
 
-		$this->addState();
+        $this->addState();
 
-		\BroYandexZen\Classes\FeedHelper::run( $this->categories );
-		new        \BroYandexZen\Classes\ZenCategories( $this->categories );
+        new        \BroYandexZen\Classes\FeedHelper($this->categories);
+        new        \BroYandexZen\Classes\ZenCategories($this->categories);
 
-		self::$textdomine = $this->setTextdomain();
-		new Feed( $this->path, $this->
-		g );
+        self::$textdomine = $this->setTextdomain();
+        new Feed($this->path, $this->
+        g);
 
-		register_activation_hook( __FILE__, [ $this, 'hook_activate' ] );
-		register_deactivation_hook( __FILE__, [ $this, 'hook_deactivate' ] );
+        register_activation_hook(__FILE__, [$this, 'hook_activate']);
+        register_deactivation_hook(__FILE__, [$this, 'hook_deactivate']);
 
-	}
+    }
 
-	private function addState() {
-		$this->path = plugin_dir_path( __FILE__ );
-		$this->url  = plugin_dir_url( __FILE__ );
-	}
+    private function addState()
+    {
+        $this->path = plugin_dir_path(__FILE__);
+        $this->url = plugin_dir_url(__FILE__);
+    }
 
-	public function hook_activate() {
-		if ( current_user_can( 'activate_plugins' ) ) {
-			flush_rewrite_rules( false );
-		}
-	}
+    public function hook_activate()
+    {
+        if (current_user_can('activate_plugins')) {
+            flush_rewrite_rules(false);
+        }
+    }
 
-	public function hook_deactivate() {
-		if ( current_user_can( 'activate_plugins' ) ) {
-			flush_rewrite_rules( false );
-		}
+    public function hook_deactivate()
+    {
+        if (current_user_can('activate_plugins')) {
+            flush_rewrite_rules(false);
+        }
 
-	}
+    }
 
 
 }
 
-function BroYandexZen__init() {
-	new BroYandexZen();
+function BroYandexZen__init()
+{
+    new BroYandexZen();
 }
 
-add_action( 'plugins_loaded', 'BroYandexZen__init', 30 );
+add_action('plugins_loaded', 'BroYandexZen__init', 30);
