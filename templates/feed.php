@@ -29,14 +29,7 @@
 					'operator' => 'NOT IN',
 				)
 			),
-			'meta_query'     => array(
-				'relation' => 'OR',
-				array(
-					'key'     => "_advert_post_marketing",
-					'compare' => 'NOT EXISTS',
-				),
-			),
-		);
+        );
 		$args  = apply_filters( "BroYandexZenFeedFields_post_args", $args );
 		$posts = get_posts( $args );
 		foreach ( $posts as $post ):?>
