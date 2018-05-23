@@ -40,7 +40,7 @@ namespace BroYandexZen {
 			$base_dir = rtrim( $base_dir, DIRECTORY_SEPARATOR ) . '/';
 
 			if ( isset( $this->prefixes[ $prefix ] ) === false ) {
-				$this->prefixes[ $prefix ] = array();
+                $this->prefixes[$prefix] = [];
 			}
 
 			if ( $prepend ) {
