@@ -45,7 +45,7 @@ class ZenCategories
                        value="<?php echo wp_create_nonce(__FILE__); ?>"/>
                 <?php
             },
-            ['post', 'heroine'],
+            ['post'],
             'side',
             'high');
     }
