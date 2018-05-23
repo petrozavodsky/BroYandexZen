@@ -124,7 +124,7 @@ class FeedHelper
 
     public static function get_image_type($filename)
     {
-        $mime_types = array(
+        $mime_types = [
             'png' => 'image/png',
             'jpe' => 'image/jpeg',
             'jpeg' => 'image/jpeg',
@@ -136,7 +136,7 @@ class FeedHelper
             'tif' => 'image/tiff',
             'svg' => 'image/svg+xml',
             'svgz' => 'image/svg+xml',
-        );
+        ];
 
         $ext = strtolower(array_pop(explode('.', $filename)));
         if (array_key_exists($ext, $mime_types)) {
