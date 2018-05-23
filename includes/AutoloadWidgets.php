@@ -10,7 +10,7 @@ namespace BroYandexZen {
 		 *
 		 * @var array
 		 */
-		protected $prefixes = array();
+        protected $prefixes = [];
 
 		/**
 		 * Register loader with SPL autoloader stack.
@@ -18,7 +18,7 @@ namespace BroYandexZen {
 		 * @return void
 		 */
 		public function register() {
-			spl_autoload_register( array( $this, 'loadClass' ) );
+            spl_autoload_register([$this, 'loadClass']);
 		}
 
 		/**
@@ -40,7 +40,7 @@ namespace BroYandexZen {
 			$base_dir = rtrim( $base_dir, DIRECTORY_SEPARATOR ) . '/';
 
 			if ( isset( $this->prefixes[ $prefix ] ) === false ) {
-				$this->prefixes[ $prefix ] = array();
+                $this->prefixes[$prefix] = [];
 			}
 
 			if ( $prepend ) {

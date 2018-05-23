@@ -7,26 +7,59 @@ class Feed
 {
 
     private $plugin_path;
+
     private $slug;
 
-    function __construct($plugin_path, $slug)
+    public function __construct($plugin_path, $slug)
     {
+
         $this->plugin_path = $plugin_path;
+
         $this->slug = $slug;
-        add_feed($slug, [$this, "add_feed"]);
+
+        add_action('init', [$this, 'init_feed']);
+
     }
 
-
-    function feed_markup()
+    public function init_feed()
     {
-        header('Content-Type: ' . feed_content_type('rss') . '; charset=' . get_option('blog_charset'), true);
+        add_feed($this->slug, [$this, 'feed_markup']);
+    }
+
+    public function feed_markup()
+    {
+
+        /**
+         * Hack php 7.2 compatible
+         */
+        global $page, $pages;
+        $pages = [1, 2];
+        $page = [1, 2];
+
+
+        header(
+            'Content-Type: ' . feed_content_type('rss') . '; charset=' . get_option('blog_charset'),
+            true
+        );
+
         do_action('BroYandexZenFeed_feed_before');
-        $template = apply_filters('BroYandexZenFeed_template_rss', $this->plugin_path . "templates/feed.php");
-        if (file_exists($template)) {
-            require_once($template);
+
+        $template = get_stylesheet_directory() . '/bro-yandex-feed-templates.php';
+
+        if (!file_exists($template)) {
+            $template = $this->plugin_path . "templates/feed.php";
         }
+
+        load_template(
+
+            apply_filters('BroYandexZenFeed_template_rss', $template)
+
+        );
+
         do_action('BroYandexZenFeed_feed_after');
+
         exit;
+
     }
 
 }
