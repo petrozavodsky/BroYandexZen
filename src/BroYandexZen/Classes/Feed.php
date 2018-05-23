@@ -37,14 +37,29 @@ class Feed
         $page = [1, 2];
 
 
-        header('Content-Type: ' . feed_content_type('rss') . '; charset=' . get_option('blog_charset'), true);
+        header(
+            'Content-Type: ' . feed_content_type('rss') . '; charset=' . get_option('blog_charset'),
+            true
+        );
+
         do_action('BroYandexZenFeed_feed_before');
-        $template = apply_filters('BroYandexZenFeed_template_rss', $this->plugin_path . "templates/feed.php");
-        if (file_exists($template)) {
-            require_once($template);
+
+        $template = get_stylesheet_directory() . '/bro-yandex-feed-templates.php';
+
+        if (!file_exists($template)) {
+            $template = $this->plugin_path . "templates/feed.php";
         }
+
+        load_template(
+
+            apply_filters('BroYandexZenFeed_template_rss', $template)
+
+        );
+
         do_action('BroYandexZenFeed_feed_after');
+
         exit;
+
     }
 
 }
