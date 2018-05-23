@@ -64,13 +64,13 @@ class BroYandexZen extends Wrap
 
         $this->addState();
 
-//        new FeedHelper($this->categories);
-//        new ZenCategories($this->categories);
+        new FeedHelper($this->categories);
+        new ZenCategories($this->categories);
 
         new Feed($this->path, self::$slug);
 
-//        register_activation_hook(__FILE__, [$this, 'hook_activate']);
-//        register_deactivation_hook(__FILE__, [$this, 'hook_deactivate']);
+        register_activation_hook(__FILE__, [$this, 'hook_activate']);
+        register_deactivation_hook(__FILE__, [$this, 'hook_deactivate']);
 
     }
 
@@ -80,20 +80,20 @@ class BroYandexZen extends Wrap
         $this->url = plugin_dir_url(__FILE__);
     }
 
-//    public function hook_activate()
-//    {
-//        if (current_user_can('activate_plugins')) {
-//            flush_rewrite_rules(false);
-//        }
-//    }
-//
-//    public function hook_deactivate()
-//    {
-//        if (current_user_can('activate_plugins')) {
-//            flush_rewrite_rules(false);
-//        }
-//
-//    }
+    public function hook_activate()
+    {
+        if (current_user_can('activate_plugins')) {
+            flush_rewrite_rules(false);
+        }
+    }
+
+    public function hook_deactivate()
+    {
+        if (current_user_can('activate_plugins')) {
+            flush_rewrite_rules(false);
+        }
+
+    }
 
 
 }
