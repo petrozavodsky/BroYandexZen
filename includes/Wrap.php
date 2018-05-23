@@ -92,7 +92,8 @@ namespace BroYandexZen {
 			$this->loader->register();
 		}
 
-		public function registerJs( $name, $in_footer = false, $deps = array(), $version = false, $file = false ) {
+        public function registerJs($name, $in_footer = false, $deps = [], $version = false, $file = false)
+        {
 			if ( ! $file ) {
 				$file = plugin_dir_url( $this->file ) . "public/css/{$this->base_name}-{$name}.css";
 			}
@@ -111,7 +112,8 @@ namespace BroYandexZen {
 			return $name;
 		}
 
-		public function addJs( $name, $position = "wp_enqueue_scripts", $deps = array(), $version = false, $file = false ) {
+        public function addJs($name, $position = "wp_enqueue_scripts", $deps = [], $version = false, $file = false)
+        {
 			$name      = $this->registerJs( $name, $file, $deps, $version );
 			$in_footer = false;
 
@@ -127,7 +129,8 @@ namespace BroYandexZen {
 			} );
 		}
 
-		public function registerCss( $name, $deps = array(), $version = false, $file = false, $media = 'all' ) {
+        public function registerCss($name, $deps = [], $version = false, $file = false, $media = 'all')
+        {
 			if ( ! $file ) {
 				$file = plugin_dir_url( $this->file ) . "public/css/{$this->base_name}-{$name}.css";
 			}
@@ -147,7 +150,8 @@ namespace BroYandexZen {
 		}
 
 
-		public function addCss( $name, $position = "wp_enqueue_scripts", $deps = array(), $version = false, $file = false, $media = 'all' ) {
+        public function addCss($name, $position = "wp_enqueue_scripts", $deps = [], $version = false, $file = false, $media = 'all')
+        {
 
 			if ( $position == "footer" ) {
 				$position = "wp_footer";
