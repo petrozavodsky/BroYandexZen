@@ -35,12 +35,6 @@
 					'key'     => "_advert_post_marketing",
 					'compare' => 'NOT EXISTS',
 				),
-				array(
-					'key'     => "_advert_post_marketing",
-					'value'   => 'no',
-					'compare' => '=',
-				),
-
 			),
 		);
 		$args  = apply_filters( "BroYandexZenFeedFields_post_args", $args );
