@@ -23,7 +23,7 @@ class Feed
 
     public function init_feed()
     {
-        add_action('init', array($this, 'feed_markup'));
+        add_feed($this->slug, [$this, 'feed_markup']);
     }
 
     public function feed_markup()
