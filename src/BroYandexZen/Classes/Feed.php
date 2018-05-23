@@ -7,6 +7,7 @@ class Feed
 {
 
     private $plugin_path;
+
     private $slug;
 
     public function __construct($plugin_path, $slug)
@@ -16,14 +17,14 @@ class Feed
 
         $this->slug = $slug;
 
-        d(
-            $plugin_path, $slug
-        );
-
-//        add_feed($slug, [$this, "feed_markup"]);
+        add_action('init', [$this, 'init_feed']);
 
     }
 
+    public function init_feed()
+    {
+        add_action('init', array($this, 'init'));
+    }
 
     public function feed_markup()
     {
