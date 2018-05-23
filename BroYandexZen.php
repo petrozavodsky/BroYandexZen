@@ -68,7 +68,7 @@ class BroYandexZen extends Wrap
         new ZenCategories($this->categories);
 
         self::$textdomine = $this->setTextdomain();
-        new Feed($this->path, $this->slug);
+        new Feed($this->path, self::$slug);
 
         register_activation_hook(__FILE__, [$this, 'hook_activate']);
         register_deactivation_hook(__FILE__, [$this, 'hook_deactivate']);

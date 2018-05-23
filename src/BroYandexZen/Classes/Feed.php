@@ -9,15 +9,23 @@ class Feed
     private $plugin_path;
     private $slug;
 
-    function __construct($plugin_path, $slug)
+    public function __construct($plugin_path, $slug)
     {
+
         $this->plugin_path = $plugin_path;
+
         $this->slug = $slug;
-        add_feed($slug, [$this, "add_feed"]);
+
+        d(
+            $plugin_path, $slug
+        );
+
+//        add_feed($slug, [$this, "feed_markup"]);
+
     }
 
 
-    function feed_markup()
+    public function feed_markup()
     {
         header('Content-Type: ' . feed_content_type('rss') . '; charset=' . get_option('blog_charset'), true);
         do_action('BroYandexZenFeed_feed_before');
