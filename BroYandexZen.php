@@ -7,6 +7,7 @@ Author: petrozavodsky, vovasik
 Author URI: http://alkoweb.ru
 Text Domain: BroYandexZen
 Domain Path: /languages
+Version: 2.0.0
 Requires PHP: 5.6
 */
 
