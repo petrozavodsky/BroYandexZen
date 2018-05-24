@@ -9,14 +9,21 @@ class ZenCategories
     public $categories;
 
 
-    function __construct($categories)
+    public function __construct($categories)
     {
         $this->categories = $categories;
         add_action('add_meta_boxes', [$this, 'fields'], 1);
         add_action('save_post', [$this, 'fields_update'], 0);
+        add_action('BroYandexZenFeedFields_post_args', [$this, 'exclude_empty']);
     }
 
-    function fields()
+    public function exclude_empty($args)
+    {
+
+        return $args;
+    }
+
+    public function fields()
     {
         add_meta_box(
             $this->base_name . '_fields',
@@ -51,7 +58,7 @@ class ZenCategories
             'high');
     }
 
-    function fields_update($post_id)
+    public function fields_update($post_id)
     {
         if (!isset($_POST[$this->base_name . '_fields_nonce']) || !wp_verify_nonce($_POST[$this->base_name . '_fields_nonce'], __FILE__)) {
             return false;
