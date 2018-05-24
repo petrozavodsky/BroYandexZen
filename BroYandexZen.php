@@ -6,6 +6,7 @@ Plugin URI: http://alkoweb.ru
 Author: petrozavodsky, vovasik
 Author URI: http://alkoweb.ru
 Text Domain: BroYandexZen
+Domain Path: /languages
 Requires PHP: 5.6
 */
 
