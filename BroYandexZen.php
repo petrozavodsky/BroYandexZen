@@ -17,6 +17,7 @@ new Autoloader(__FILE__, 'BroYandexZen');
 
 use BroYandexZen\Base\Wrap;
 use BroYandexZen\Classes\Feed;
+use BroYandexZen\Classes\FeedHead;
 use BroYandexZen\Classes\FeedHelper;
 use BroYandexZen\Classes\ZenCategories;
 
@@ -64,6 +65,7 @@ class BroYandexZen extends Wrap
 
         $this->addState();
 
+        new FeedHead();
         new FeedHelper($this->categories);
         new ZenCategories($this->categories);
 

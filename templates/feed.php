@@ -7,14 +7,9 @@
      xmlns:georss="http://www.georss.org/georss">
 
     <channel>
-        <title>
-            <?php echo esc_html(get_bloginfo('name')); ?>
-        </title>
-        <link><?php echo esc_html(get_option('home')); ?></link>
-        <description>
-            <?php echo esc_html(get_bloginfo('description')); ?>
-        </description>
-        <language><?php echo array_shift(explode("-", get_bloginfo('language'))); ?></language>
+
+        <?php do_action('BroYandexZenFeedFields_head', $post); ?>
+
         <?php
 
         global $post;
