@@ -14,11 +14,25 @@ class ZenCategories
         $this->categories = $categories;
         add_action('add_meta_boxes', [$this, 'fields'], 1);
         add_action('save_post', [$this, 'fields_update'], 0);
-        add_action('BroYandexZenFeedFields_post_args', [$this, 'exclude_empty']);
+        add_action('BroYandexZenFeedFields_post_args', [$this, 'exclude_empty'], 10);
     }
 
     public function exclude_empty($args)
     {
+
+        $args['meta_query'] = [
+            'relation' => 'AND',
+            'exclude_zen' => [
+                'key' => $this->field_name,
+                'value' => 'none',
+                'type' => 'CHAR',
+                'compare' => 'NOT IN',
+            ],
+            'exist'=>[
+                'key' => $this->field_name,
+                'compare' => 'EXISTS'
+            ]
+        ];
 
         return $args;
     }
