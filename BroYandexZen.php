@@ -1,7 +1,7 @@
 <?php
 
 /*
-Plugin Name: Bro Yandex zen rss feed
+Plugin Name: Bro Yandex zen rss feed NG
 Plugin URI: http://alkoweb.ru
 Author: petrozavodsky
 Author URI: http://alkoweb.ru
