@@ -9,6 +9,7 @@ Text Domain: BroYandexZen
 Domain Path: /languages
 Version: 2.0.0
 Requires PHP: 5.6
+License: GPLv3
 */
 
 require_once(plugin_dir_path(__FILE__) . "includes/Autoloader.php");
