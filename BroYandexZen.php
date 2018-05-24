@@ -66,8 +66,8 @@ class BroYandexZen extends Wrap
         $this->addState();
 
         new FeedHead();
-        new FeedHelper($this->categories);
-        new ZenCategories($this->categories);
+        new FeedHelper(self::$categories);
+        new ZenCategories(self::$categories);
 
         new Feed($this->path, self::$slug);
 
