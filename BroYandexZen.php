@@ -3,7 +3,7 @@
 /*
 Plugin Name: Bro Yandex zen rss feed NG
 Plugin URI: http://alkoweb.ru
-Author: petrozavodsky
+Author: petrozavodsky, vovasik
 Author URI: http://alkoweb.ru
 Requires PHP: 5.6
 */
