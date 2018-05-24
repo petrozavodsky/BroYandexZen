@@ -9,14 +9,35 @@ class ZenCategories
     public $categories;
 
 
-    function __construct($categories)
+    public function __construct($categories)
     {
         $this->categories = $categories;
         add_action('add_meta_boxes', [$this, 'fields'], 1);
         add_action('save_post', [$this, 'fields_update'], 0);
+        add_action('BroYandexZenFeedFields_post_args', [$this, 'exclude_empty'], 10);
     }
 
-    function fields()
+    public function exclude_empty($args)
+    {
+
+        $args['meta_query'] = [
+            'relation' => 'AND',
+            'exclude_zen' => [
+                'key' => $this->field_name,
+                'value' => 'none',
+                'type' => 'CHAR',
+                'compare' => 'NOT IN',
+            ],
+            'exist'=>[
+                'key' => $this->field_name,
+                'compare' => 'EXISTS'
+            ]
+        ];
+
+        return $args;
+    }
+
+    public function fields()
     {
         add_meta_box(
             $this->base_name . '_fields',
@@ -34,6 +55,7 @@ class ZenCategories
                                 $current = $this->categories[0];
                             }
                             ?>
+                            <option value="none" <?php selected($current, 'none') ?> ><?php echo 'Не добавзять в zen'; ?></option>
                             <?php foreach ($this->categories as $category): ?>
                                 <option value="<?php echo $category; ?>" <?php selected($current, $category) ?> ><?php echo $category; ?></option>
                             <?php endforeach; ?>
@@ -50,7 +72,7 @@ class ZenCategories
             'high');
     }
 
-    function fields_update($post_id)
+    public function fields_update($post_id)
     {
         if (!isset($_POST[$this->base_name . '_fields_nonce']) || !wp_verify_nonce($_POST[$this->base_name . '_fields_nonce'], __FILE__)) {
             return false;

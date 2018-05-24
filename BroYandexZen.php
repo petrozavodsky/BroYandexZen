@@ -1,11 +1,15 @@
 <?php
 
 /*
-Plugin Name: Bro Yandex zen rss feed
+Plugin Name: Bro Yandex zen rss feed NG
 Plugin URI: http://alkoweb.ru
-Author: petrozavodsky
+Author: petrozavodsky, vovasik
 Author URI: http://alkoweb.ru
+Text Domain: BroYandexZen
+Domain Path: /languages
+Version: 2.0.0
 Requires PHP: 5.6
+License: GPLv3
 */
 
 require_once(plugin_dir_path(__FILE__) . "includes/Autoloader.php");
@@ -17,6 +21,7 @@ new Autoloader(__FILE__, 'BroYandexZen');
 
 use BroYandexZen\Base\Wrap;
 use BroYandexZen\Classes\Feed;
+use BroYandexZen\Classes\FeedHead;
 use BroYandexZen\Classes\FeedHelper;
 use BroYandexZen\Classes\ZenCategories;
 
@@ -27,7 +32,7 @@ class BroYandexZen extends Wrap
 
     public $path;
     public $url;
-    public static $slug = 'feed-yandex-zen';
+    public static $slug = 'yandex-zen';
     public static $categories = [
         'Общество',
         'Происшествия',
@@ -64,8 +69,9 @@ class BroYandexZen extends Wrap
 
         $this->addState();
 
-        new FeedHelper($this->categories);
-        new ZenCategories($this->categories);
+        new FeedHead();
+        new FeedHelper(self::$categories);
+        new ZenCategories(self::$categories);
 
         new Feed($this->path, self::$slug);
 
