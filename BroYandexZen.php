@@ -27,7 +27,7 @@ class BroYandexZen extends Wrap
 
     public $path;
     public $url;
-    public static $slug = 'feed-yandex-zen';
+    public static $slug = 'yandex-zen';
     public static $categories = [
         'Общество',
         'Происшествия',
