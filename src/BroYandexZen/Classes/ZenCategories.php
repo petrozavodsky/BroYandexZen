@@ -34,6 +34,7 @@ class ZenCategories
                                 $current = $this->categories[0];
                             }
                             ?>
+                            <option value="none" <?php selected($current, 'none') ?> ><?php echo 'Не добавзять в zen'; ?></option>
                             <?php foreach ($this->categories as $category): ?>
                                 <option value="<?php echo $category; ?>" <?php selected($current, $category) ?> ><?php echo $category; ?></option>
                             <?php endforeach; ?>
